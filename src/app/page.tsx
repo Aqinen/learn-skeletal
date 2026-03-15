@@ -1,53 +1,83 @@
-export default function Home() {
+import { getGroupedClassifications } from '@/lib/orthoData';
+import Link from 'next/link';
+
+export default async function Home() {
+  const boneRegions = await getGroupedClassifications();
+
   return (
     <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="container mx-auto px-4 py-16">
-        <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
-            Welcome to Your
-            <span className="text-blue-600"> Next.js App</span>
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            ระบบจำแนกกระดูก
+            <span className="text-blue-600"> Orthopedic Classifications</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            A modern web application built with Next.js, TypeScript, and Tailwind CSS
+            คลังข้อมูลการจำแนกชนิดกระดูกแต่ละส่วนสำหรับแพทย์และบุคลากรทางการแพทย์
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
-            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-              <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Lightning Fast</h3>
-            <p className="text-gray-600">Built with Next.js for optimal performance and SEO</p>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
-            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-              <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Type Safe</h3>
-            <p className="text-gray-600">Full TypeScript support for better development experience</p>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
-            <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-              <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Beautiful UI</h3>
-            <p className="text-gray-600">Styled with Tailwind CSS for modern, responsive design</p>
-          </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {boneRegions.map((region) => (
+            <Link 
+              key={region.id}
+              href={`/bone/${region.id}`}
+              className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 group"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center group-hover:bg-blue-200 transition-colors">
+                  <span className="text-blue-600 font-bold text-lg">
+                    {region.id.split(' - ')[0]}
+                  </span>
+                </div>
+                <svg className="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+              
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                {region.name}
+              </h3>
+              
+              <p className="text-sm text-gray-600">
+                {region.classifications.length} ระบบการจำแนก
+              </p>
+              
+              <div className="mt-3 flex flex-wrap gap-1">
+                {region.classifications.slice(0, 2).map((cls, idx) => (
+                  <span 
+                    key={idx}
+                    className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded"
+                  >
+                    {cls.Classification_Name.split(' ')[0]}
+                  </span>
+                ))}
+                {region.classifications.length > 2 && (
+                  <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded">
+                    +{region.classifications.length - 2}
+                  </span>
+                )}
+              </div>
+            </Link>
+          ))}
         </div>
 
-        <div className="text-center">
-          <button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-            Get Started
-          </button>
+        <div className="mt-16 text-center">
+          <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              เกี่ยวกับระบบนี้
+            </h2>
+            <p className="text-gray-600 mb-6">
+              ระบบนี้รวบรวมการจำแนกชนิดกระดูกที่สำคัญในทางการแพทย์ 
+              โดยแบ่งตามตำแหน่งของกระดูกและระบบการจำแนกที่ใช้ในการวินิจฉัยและวางแผนการรักษา
+            </p>
+            <Link 
+              href="/about"
+              className="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+            >
+              ดูข้อมูลเพิ่มเติม
+            </Link>
+          </div>
         </div>
       </div>
     </main>

@@ -6,7 +6,7 @@ export default function Navigation() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="text-xl font-bold text-blue-600">
-            My App
+            🦴 ระบบจำแนกกระดูก
           </Link>
           
           <div className="flex space-x-8">
@@ -14,13 +14,13 @@ export default function Navigation() {
               href="/" 
               className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
             >
-              Home
+              หน้าหลัก
             </Link>
             <Link 
               href="/about" 
               className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
             >
-              About
+              เกี่ยวกับ
             </Link>
           </div>
         </div>
