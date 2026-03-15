@@ -85,13 +85,13 @@ export default async function BoneDetailPage({ params }: PageProps) {
                       📋 รายละเอียดการจำแนก
                     </h4>
                     <div className="w-full overflow-x-auto overscroll-x-contain pb-2 bg-gray-50 rounded-lg p-4 border border-gray-200 md:overflow-x-visible" style={{ WebkitOverflowScrolling: 'touch' }}>
-                      <table className="w-full divide-y divide-gray-200 table-fixed">
+                      <table className="w-full divide-y divide-gray-200 md:table-fixed" style={{ minWidth: '350px' }}>
                         <thead className="bg-gray-100">
                           <tr>
-                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider min-w-[150px] md:w-1/4">
                               ประเภท
                             </th>
-                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-3/4">
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider min-w-[200px] md:w-3/4">
                               รายละเอียด
                             </th>
                           </tr>
@@ -166,13 +166,13 @@ export default async function BoneDetailPage({ params }: PageProps) {
                       🏥 การรักษา
                     </h4>
                     <div className="w-full overflow-x-auto overscroll-x-contain pb-2 bg-green-50 rounded-lg p-4 border border-green-200 md:overflow-x-visible" style={{ WebkitOverflowScrolling: 'touch' }}>
-                      <table className="w-full divide-y divide-green-200 table-fixed">
+                      <table className="w-full divide-y divide-green-200 md:table-fixed" style={{ minWidth: '350px' }}>
                         <thead className="bg-green-100">
                           <tr>
-                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider min-w-[150px] md:w-1/4">
                               ประเภท
                             </th>
-                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-3/4">
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider min-w-[200px] md:w-3/4">
                               การรักษา
                             </th>
                           </tr>
