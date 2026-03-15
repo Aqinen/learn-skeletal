@@ -9,11 +9,11 @@ export default async function Home() {
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            ระบบจำแนกกระดูก
+            Pre-Ghost Structural System
             <span className="text-blue-600"> Orthopedic Classifications</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            คลังข้อมูลการจำแนกชนิดกระดูกแต่ละส่วนสำหรับแพทย์และบุคลากรทางการแพทย์
+            คลังข้อมูลการจำแนกโครงสร้างกระดูกสำหรับแพทย์และบุคลากรทางการแพทย์
           </p>
         </div>
 
@@ -21,7 +21,7 @@ export default async function Home() {
           {boneRegions.map((region) => (
             <Link 
               key={region.id}
-              href={`/bone/${region.id}`}
+              href={`/bone/${encodeURIComponent(region.id)}`}
               className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 group"
             >
               <div className="flex items-center justify-between mb-4">
@@ -68,7 +68,7 @@ export default async function Home() {
               เกี่ยวกับระบบนี้
             </h2>
             <p className="text-gray-600 mb-6">
-              ระบบนี้รวบรวมการจำแนกชนิดกระดูกที่สำคัญในทางการแพทย์ 
+              ระบบนี้รวบรวมการจำแนกโครงสร้างกระดูกที่สำคัญในทางการแพทย์ 
               โดยแบ่งตามตำแหน่งของกระดูกและระบบการจำแนกที่ใช้ในการวินิจฉัยและวางแผนการรักษา
             </p>
             <Link 

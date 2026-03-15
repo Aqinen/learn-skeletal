@@ -55,7 +55,8 @@ export async function getGroupedClassifications(): Promise<BoneRegion[]> {
 }
 
 export async function getClassificationsByRegion(regionId: string): Promise<OrthoClassification[]> {
-  const grouped = await getGroupedClassifications();
-  const region = grouped.find(r => r.id === regionId);
-  return region ? region.classifications : [];
+  const data = await getOrthoData();
+  
+  // Find all classifications that match the region (handle cases where multiple entries have same region)
+  return data.filter(item => item.Bone_Region === regionId);
 }
