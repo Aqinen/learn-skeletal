@@ -6,8 +6,27 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "My Next.js App",
-  description: "A modern web application built with Next.js, TypeScript, and Tailwind CSS",
+  title: "PGSS !!",
+  description: "Pre-Ghost Structural System",
+  icons: {
+    icon: [
+      { url: '/icon.webp', type: 'image/webp' },
+      { url: '/icon.png', type: 'image/png' }
+    ],
+    shortcut: [
+      { url: '/icon.webp', type: 'image/webp' },
+      { url: '/icon.png', type: 'image/png' }
+    ],
+    apple: [
+      { url: '/icon.png', sizes: '512x512', type: 'image/png' }
+    ],
+  },
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'PGSS !!',
+  },
 };
 
 export default function RootLayout({
