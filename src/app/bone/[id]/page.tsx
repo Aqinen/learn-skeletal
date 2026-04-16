@@ -103,11 +103,11 @@ export default async function BoneDetailPage({ params }: PageProps) {
                             const tableData = [];
                             
                             lines.forEach(line => {
-                              if (line.includes('Type') || line.includes('type')) {
+                              if (line.includes(':')) {
                                 const parts = line.split(':');
                                 if (parts.length >= 2) {
                                   const typePart = parts[0].trim();
-                                  const descPart = parts[1].trim();
+                                  const descPart = parts.slice(1).join(':').trim();
                                   tableData.push({ type: typePart, description: descPart });
                                 }
                               } else if (line.includes('Based on') || line.includes('based on')) {
@@ -115,6 +115,8 @@ export default async function BoneDetailPage({ params }: PageProps) {
                                   type: classification.Classification_Name, 
                                   description: line.trim() 
                                 });
+                              } else if (line.trim().length > 0) {
+                                tableData.push({ type: 'ทั่วไป', description: line.trim() });
                               }
                             });
                             
@@ -184,10 +186,10 @@ export default async function BoneDetailPage({ params }: PageProps) {
                             const tableData = [];
                             
                             lines.forEach(line => {
-                              const parts = line.split(':');
-                              if (parts.length >= 2) {
+                              if (line.includes(':')) {
+                                const parts = line.split(':');
                                 const typePart = parts[0].trim();
-                                const descPart = parts[1].trim();
+                                const descPart = parts.slice(1).join(':').trim();
                                 tableData.push({ type: typePart, description: descPart });
                               } else if (line.includes('-') || line.includes('–')) {
                                 const dashParts = line.split(/[-–]/);
